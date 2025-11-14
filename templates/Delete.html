@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Удаление сотрудника</title>
+  <link rel="stylesheet" href="Delete.css" />
+</head>
+<body>
+  <!-- Верхняя панель -->
+  <header class="top-bar">
+    <div class="brand">PayMaster</div>
+    <nav class="nav-right">
+      <span class="nav-item">Назад</span>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="content form-card">
+      <form id="deleteForm">
+        <h2>Удаление сотрудника</h2>
+
+        <select id="accountant">
+          <option value="">Имя сотрудника</option>
+          <option value="Иванова А.А.">Студеничник А.А.</option>
+          <option value="Смирнов В.В.">Марцов В.В.</option>
+          <option value="---">---</option>
+          <option value="(Список)">(Список)</option>
+        </select>
+
+        <button type="submit" class="primary">УДАЛИТЬ</button>
+        <div id="result" class="message"></div>
+      </form>
+    </section>
+  </main>
+
+  <!-- Анимированный фон -->
+  <div class="animated-bg" aria-hidden="true">
+    <div class="shape circle"></div>
+    <div class="shape circle small"></div>
+    <div class="shape circle tiny"></div>
+    <div class="shape circle mid"></div>
+
+    <div class="shape square"></div>
+    <div class="shape square big"></div>
+    <div class="shape square small"></div>
+    <div class="shape square mid"></div>
+
+    <div class="shape triangle"></div>
+    <div class="shape triangle small"></div>
+    <div class="shape triangle mid"></div>
+    <div class="shape triangle tiny"></div>
+  </div>
+
+  <script>
+    document.getElementById('deleteForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const selected = document.getElementById('accountant').value;
+      const result = document.getElementById('result');
+
+      if (selected) {
+        result.textContent = `Сотрудника ${selected} удалён.`;
+        result.style.color = 'green';
+      } else {
+        result.textContent = 'Пожалуйста, выберите бухгалтера.';
+        result.style.color = 'red';
+      }
+    });
+  </script>
+</body>
+</html>

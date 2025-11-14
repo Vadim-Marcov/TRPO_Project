@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Авторизация</title>
+  <link rel="stylesheet" href="Registred.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <h1>С возвращением!</h1>
+      <p>Чтобы продолжить работу с приложением, пожалуйста, заполните необходимые поля.</p>
+    </div>
+    <div class="right-panel">
+      <form action="/login" method="POST" id="loginForm">
+        <h2>Вход</h2>
+        <input type="text" name="name" placeholder="Имя пользователя" required />
+        <input type="password" name="password" placeholder="Пароль" required />
+        <div class="options">
+          <label><input type="checkbox" name="remember" /> Запомнить меня</label>
+        </div>
+        <button type="submit">ВОЙТИ</button>
+
+      </form>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

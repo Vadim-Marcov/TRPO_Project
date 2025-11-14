@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Добавление сотрудника</title>
+  <link rel="stylesheet" href="AddEmployee.css" />
+</head>
+<body>
+  <!-- Верхняя панель -->
+  <header class="top-bar">
+    <div class="brand">PayMaster</div>
+    <nav class="nav-right">
+      <span class="nav-item">Назад</span>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="content form-card">
+      <form id="addForm">
+        <h2>Добавление сотрудника</h2>
+
+        <label for="fullname">ФИО</label>
+        <input type="text" id="fullname" placeholder="Введите ФИО" />
+
+        <label for="rateType">Выбор ставки</label>
+        <select id="rateType">
+          <option value="">Выберите ставку</option>
+          <option value="hourly">Почасовая</option>
+          <option value="fixed">Фиксированная</option>
+        </select>
+
+        <label for="insert">Ввод ставки</label>
+        <input type="text" id="insert" placeholder="Введите вставку" />
+
+        <button type="submit" class="primary">ДОБАВИТЬ</button>
+        <div id="result" class="message"></div>
+      </form>
+    </section>
+  </main>
+
+  <!-- Анимированный фон -->
+  <div class="animated-bg" aria-hidden="true">
+    <div class="shape circle"></div>
+    <div class="shape circle small"></div>
+    <div class="shape circle tiny"></div>
+    <div class="shape circle mid"></div>
+
+    <div class="shape square"></div>
+    <div class="shape square big"></div>
+    <div class="shape square small"></div>
+    <div class="shape square mid"></div>
+
+    <div class="shape triangle"></div>
+    <div class="shape triangle small"></div>
+    <div class="shape triangle mid"></div>
+    <div class="shape triangle tiny"></div>
+  </div>
+
+  <script>
+    document.getElementById('addForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('fullname').value.trim();
+      const rate = document.getElementById('rateType').value;
+      const insert = document.getElementById('insert').value.trim();
+      const result = document.getElementById('result');
+
+      if (name && rate && insert) {
+        const rateLabel = rate === 'hourly' ? 'Почасовая' : 'Фиксированная';
+        result.textContent = `Сотрудник ${name} добавлен. Ставка: ${rateLabel}, Cтавка: ${insert}.`;
+        result.style.color = 'green';
+      } else {
+        result.textContent = 'Пожалуйста, заполните все поля.';
+        result.style.color = 'red';
+      }
+    });
+  </script>
+</body>
+</html>

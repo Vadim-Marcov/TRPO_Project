@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Добавление бухгалтера</title>
+  <link rel="stylesheet" href="NewBuh.css" />
+</head>
+<body>
+  <!-- Верхняя панель -->
+  <header class="top-bar">
+    <div class="brand">PayMaster</div>
+    <nav class="nav-right">
+      <span class="nav-item">Назад</span>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="content form-card">
+      <form id="loginForm">
+        <h2>Добавление бухгалтера</h2>
+
+        <label for="username">Имя пользователя</label>
+        <input type="text" id="username" placeholder="Введите имя" />
+
+        <label for="password">Пароль</label>
+        <input type="password" id="password" placeholder="Введите пароль" />
+
+        <button type="submit" class="primary">ДОБАВИТЬ</button>
+        <div id="result" class="message"></div>
+      </form>
+    </section>
+  </main>
+
+  <!-- Анимированный фон -->
+  <div class="animated-bg" aria-hidden="true">
+    <div class="shape circle"></div>
+    <div class="shape circle small"></div>
+    <div class="shape square"></div>
+    <div class="shape square big"></div>
+    <div class="shape triangle"></div>
+    <div class="shape triangle small"></div>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value.trim();
+      const result = document.getElementById('result');
+
+      if (user && pass) {
+        result.textContent = `Бухгалтер ${user} добавлен.`;
+        result.style.color = 'green';
+      } else {
+        result.textContent = 'Пожалуйста, заполните все поля.';
+        result.style.color = 'red';
+      }
+    });
+  </script>
+</body>
+</html>

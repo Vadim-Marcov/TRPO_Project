@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Расчёт зарплаты</title>
+  <link rel="stylesheet" href="BuhCalculate.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <div class="brand">PayMaster</div>
+    <nav class="nav-center">
+      <span class="nav-item">Данные по зарплате</span>
+      <span class="nav-item">Порог зарплаты</span>
+    </nav>
+    <div class="nav-right">
+      <span class="nav-item">Выйти</span>
+    </div>
+  </header>
+
+  <main class="content">
+    <form id="salaryForm">
+      <h2>Расчёт зарплаты</h2>
+
+      <label for="fullname">ФИО</label>
+      <select id="fullname">
+        <option value="">Выберите сотрудника</option>
+        <option value="Иванов И.И.">Иванов И.И.</option>
+        <option value="Петров П.П.">Петров П.П.</option>
+        <option value="Сидорова С.С.">Сидорова С.С.</option>
+      </select>
+
+      <label for="period">Период (год, месяц)</label>
+      <input type="month" id="period" />
+
+      <label for="hours">Кол-во отработанных часов</label>
+      <input type="number" id="hours" min="0" />
+
+      <label for="overtime">Сверхурочные часы (необязательно)</label>
+      <input type="number" id="overtime" min="0" />
+
+      <label for="premium">Премии (необязательно)</label>
+      <input type="number" id="premium" min="0" />
+
+      <label for="bonus">Бонусы (необязательно)</label>
+      <input type="number" id="bonus" min="0" />
+
+      <button type="submit">РАССЧИТАТЬ</button>
+      <div id="result" class="message"></div>
+    </form>
+  </main>
+
+  <!-- Анимированный фон -->
+  <div class="animated-bg">
+    <div class="shape circle"></div>
+    <div class="shape circle small"></div>
+    <div class="shape square"></div>
+    <div class="shape square big"></div>
+    <div class="shape triangle"></div>
+    <div class="shape triangle small"></div>
+  </div>
+
+  <script>
+    document.getElementById('salaryForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const hours = parseFloat(document.getElementById('hours').value) || 0;
+      const overtime = parseFloat(document.getElementById('overtime').value) || 0;
+      const bonus = parseFloat(document.getElementById('bonus').value) || 0;
+      const premium = parseFloat(document.getElementById('premium').value) || 0;
+
+      const baseRate = 500;
+      const overtimeRate = 750;
+
+      const total =
+        hours * baseRate +
+        overtime * overtimeRate +
+        bonus +
+        premium;
+
+      const result = document.getElementById('result');
+      result.textContent = `Итоговая сумма: ${total.toLocaleString('ru-RU')} ₽`;
+    });
+  </script>
+</body>
+</html>

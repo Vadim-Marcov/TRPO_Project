@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Порог зарплаты</title>
+  <link rel="stylesheet" href="PorogSalary.css" />
+</head>
+<body>
+  <!-- Верхняя панель -->
+  <header class="top-bar">
+    <div class="brand">PayMaster</div>
+    <nav class="nav-right">
+      <span class="nav-item">Назад</span>
+    </nav>
+  </header>
+
+  <!-- Основной блок -->
+  <main class="page">
+    <section class="content table-card">
+      <h2>Порог зарплаты</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ФИО</th>
+            <th>Итого</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>---</td>
+            <td>---</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Поле ввода зарплаты -->
+      <label for="salaryInput" class="input-label">Введите сумму зарплаты</label>
+      <input type="number" id="salaryInput" class="salary-input" placeholder="Например: 45000" />
+
+      <!-- Кнопка подтверждения -->
+      <button class="confirm-button">Подтвердить</button>
+    </section>
+  </main>
+
+  <!-- Анимированный фон -->
+  <div class="animated-bg" aria-hidden="true">
+    <div class="shape circle"></div>
+    <div class="shape circle small"></div>
+    <div class="shape circle tiny"></div>
+    <div class="shape circle mid"></div>
+
+    <div class="shape square"></div>
+    <div class="shape square big"></div>
+    <div class="shape square small"></div>
+    <div class="shape square mid"></div>
+
+    <div class="shape triangle"></div>
+    <div class="shape triangle small"></div>
+    <div class="shape triangle mid"></div>
+    <div class="shape triangle tiny"></div>
+  </div>
+</body>
+</html>
