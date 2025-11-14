@@ -1,0 +1,215 @@
+/* Общие настройки */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Верхняя панель */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  padding: 20px 40px;
+}
+
+.brand {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-right {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-item {
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.nav-item:hover {
+  text-decoration: underline;
+}
+
+/* Центрирование контента */
+.page {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* Карточка формы или таблицы */
+.form-card, .table-card {
+  width: min(600px, 95%);
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-card h2, .table-card h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 26px;
+}
+
+/* Таблица с линиями */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  border: 1px solid #333;
+  margin-bottom: 30px;
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: left;
+  border: 1px solid #333;
+}
+
+thead {
+  background-color: #f5f5f5;
+}
+
+th {
+  font-weight: bold;
+  color: #333;
+}
+
+td {
+  color: #666;
+}
+
+/* Поле ввода */
+.input-label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+
+.salary-input {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* Кнопка */
+.confirm-button,
+button.primary {
+  padding: 14px 30px;
+  background-color: #2575fc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.confirm-button:hover,
+button.primary:hover {
+  background-color: #1a5edb;
+}
+
+/* Анимированный фон */
+.animated-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.shape {
+  position: absolute;
+  opacity: 0.15;
+  animation: float 12s infinite linear;
+}
+
+/* Круги */
+.circle {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: #6a11cb;
+  top: 20%; left: 10%; animation-duration: 15s;
+}
+.circle.small {
+  width: 40px; height: 40px;
+  top: 60%; left: 25%; animation-duration: 12s;
+}
+.circle.tiny {
+  width: 20px; height: 20px;
+  top: 80%; left: 5%; animation-duration: 10s;
+}
+.circle.mid {
+  width: 60px; height: 60px;
+  top: 35%; left: 50%; animation-duration: 17s;
+}
+
+/* Квадраты */
+.square {
+  width: 70px; height: 70px; background: #2575fc;
+  top: 40%; left: 70%; animation-duration: 18s;
+}
+.square.big {
+  width: 100px; height: 100px;
+  top: 55%; left: 15%; animation-duration: 20s;
+}
+.square.small {
+  width: 40px; height: 40px;
+  top: 75%; left: 80%; animation-duration: 13s;
+}
+.square.mid {
+  width: 60px; height: 60px;
+  top: 25%; left: 40%; animation-duration: 16s;
+}
+
+/* Треугольники */
+.triangle {
+  width: 0; height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 80px solid #6a11cb;
+  top: 70%; left: 30%; animation-duration: 20s;
+}
+.triangle.small {
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 40px solid #2575fc;
+  top: 10%; left: 85%; animation-duration: 14s;
+}
+.triangle.mid {
+  border-left: 35px solid transparent;
+  border-right: 35px solid transparent;
+  border-bottom: 60px solid #2575fc;
+  top: 45%; left: 85%; animation-duration: 18s;
+}
+.triangle.tiny {
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 25px solid #6a11cb;
+  top: 15%; left: 60%; animation-duration: 11s;
+}
+
+/* Анимация движения */
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-50px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
