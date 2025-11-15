@@ -125,8 +125,14 @@ button.primary {
 }
 
 .confirm-button:hover,
-button.primary:hover {
+button.primary:hover {     
   background-color: #1a5edb;
+}
+
+/* Центрирование кнопки */
+.confirm-button {
+  display: block;
+  margin: 20px auto 0; /* центрирование по горизонтали */
 }
 
 /* Анимированный фон */

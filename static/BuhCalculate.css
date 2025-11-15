@@ -134,14 +134,16 @@ body {
 
 /* Контент */
 .content {
-  padding: 60px;
+  padding: 20px;
   max-width: 600px;
-  margin: auto;
+  margin: 20px auto;
   background: white;
-  margin-top: 30px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  max-height: 80vh;
+  overflow-y: auto;
 }
+
 
 form h2 {
   margin-bottom: 20px;
