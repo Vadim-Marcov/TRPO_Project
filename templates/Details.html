@@ -4,14 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Зарплаты</title>
-  <link rel="stylesheet" href="Details.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='Details.css') }}" />
 </head>
 <body>
   <!-- Верхняя панель -->
   <header class="top-bar">
     <div class="brand">PayMaster</div>
     <nav class="nav-right">
-      <span class="nav-item">Назад</span>
+      <!-- Кнопка назад ведёт в BuhCalculate -->
+      <a href="{{ url_for('buh_home') }}" class="nav-item">Назад</a>
     </nav>
   </header>
 
@@ -25,22 +26,34 @@
             <th>ФИО</th>
             <th>Период</th>
             <th>Отработанные часы</th>
+            <th>Сверхуроч. часы</th>
             <th>Ставка</th>
+            <th>Ставка сверхуроч.</th>
             <th>Премия</th>
-            <th>Бонусы</th>
+            <th>Разовая выплата</th>
+            <th>Налог</th>
             <th>Итого</th>
           </tr>
         </thead>
         <tbody>
+          {% for p in payrolls %}
           <tr>
-            <td>---</td>
-            <td>---</td>
-            <td>---</td>
-            <td>---</td>
-            <td>---</td>
-            <td>---</td>
-            <td>---</td>
+            <td>{{ p.FIO }}</td>
+            <td>{{ p.period }}</td>
+            <td>{{ p.hoursWorked }}</td>
+            <td>{{ p.overtimeHours }}</td>
+            <td>{{ p.Rate }}</td>
+            <td>{{ p.overtimeRate }}</td>
+            <td>{{ p.bonus }}</td>
+            <td>{{ p.oneTimePayment }}</td>
+            <td>{{ p.taxAmount }}</td>
+            <td>{{ p.totalEarnings }}</td>
           </tr>
+          {% else %}
+          <tr>
+            <td colspan="10" style="text-align:center;">Нет данных</td>
+          </tr>
+          {% endfor %}
         </tbody>
       </table>
     </section>

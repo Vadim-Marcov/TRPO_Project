@@ -4,37 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Выбор бухгалтера</title>
-  <link rel="stylesheet" href="Admin.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='Admin.css') }}" />
 </head>
 <body>
   <!-- Верхняя панель -->
   <header class="top-bar grid">
     <div class="brand">PayMaster</div>
     <nav class="nav-center">
-      <span class="nav-item">Добавить нового бухгалтера</span>
+      <a href="{{ url_for('new_buh') }}" class="nav-item">Добавить нового бухгалтера</a>
     </nav>
     <div class="nav-right">
-      <span class="nav-item">Выйти</span>
+      <a href="{{ url_for('logout') }}" class="nav-item">Выйти</a>
     </div>
   </header>
 
   <!-- Основной блок -->
   <div class="page">
     <main class="content form-card">
-      <form id="accountantForm">
+      <form id="accountantForm" method="POST" action="{{ url_for('admin_home') }}">
         <h2>Выберите бухгалтера из списка</h2>
-
         <label for="accountant">Бухгалтер</label>
-        <select id="accountant">
-          <option value="">Имя бухгалтера</option>
-          <option value="Иванова А.А.">Иванова А.А.</option>
-          <option value="Смирнов В.В.">Смирнов В.В.</option>
-          <option value="---">---</option>
-          <option value="(Список)">(Список)</option>
-        </select>
+        <select id="accountant" name="accountant" required>
 
+          {% for user in users %}
+            <option value="{{ user['Name'] }}">{{ user['Name'] }}</option>
+          {% endfor %}
+        </select>
         <button type="submit" class="primary">ПОДТВЕРДИТЬ</button>
-        <div id="result" class="message"></div>
       </form>
     </main>
   </div>
@@ -48,21 +44,5 @@
     <div class="shape triangle"></div>
     <div class="shape triangle small"></div>
   </div>
-
-  <script>
-    document.getElementById('accountantForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const selected = document.getElementById('accountant').value;
-      const result = document.getElementById('result');
-
-      if (selected) {
-        result.textContent = `Выбран бухгалтер: ${selected}`;
-        result.style.color = 'green';
-      } else {
-        result.textContent = 'Пожалуйста, выберите бухгалтера.';
-        result.style.color = 'red';
-      }
-    });
-  </script>
 </body>
 </html>

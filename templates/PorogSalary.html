@@ -4,44 +4,57 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Порог зарплаты</title>
-  <link rel="stylesheet" href="PorogSalary.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='PorogSalary.css') }}" />
 </head>
 <body>
   <!-- Верхняя панель -->
   <header class="top-bar">
     <div class="brand">PayMaster</div>
     <nav class="nav-right">
-      <span class="nav-item">Назад</span>
+      <!-- Кнопка назад -->
+      <a href="{{ url_for('buh_home') }}" class="nav-item">Назад</a>
     </nav>
   </header>
 
   <!-- Основной блок -->
-  <main class="page">
-    <section class="content table-card">
-      <h2>Порог зарплаты</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ФИО</th>
-            <th>Итого</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>---</td>
-            <td>---</td>
-          </tr>
-        </tbody>
-      </table>
+<main class="page">
+  <section class="content table-card">
+    <h2>Порог зарплаты</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ФИО</th>
+          <th>Итого</th>
+          <th>Период</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for e in employees %}
+        <tr>
+          <td>{{ e.FIO }}</td>
+          <td>{{ e.totalEarnings }}</td>
+          <td>{{ e.period }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="3" style="text-align:center;">Нет сотрудников с зарплатой ниже порога</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
-      <!-- Поле ввода зарплаты -->
-      <label for="salaryInput" class="input-label">Введите сумму зарплаты</label>
-      <input type="number" id="salaryInput" class="salary-input" placeholder="Например: 45000" />
+    <!-- Форма для ввода порога -->
+    <form method="POST" action="{{ url_for('salary_threshold') }}">
+      <label for="salaryInput" class="input-label">Введите порог зарплаты</label>
+      <input type="number" id="salaryInput" name="salary" class="salary-input"  required />
 
       <!-- Кнопка подтверждения -->
-      <button class="confirm-button">Подтвердить</button>
-    </section>
-  </main>
+      <button type="submit" class="confirm-button">Подтвердить</button>
+    </form>
+  </section>
+</main>
+
+
 
   <!-- Анимированный фон -->
   <div class="animated-bg" aria-hidden="true">

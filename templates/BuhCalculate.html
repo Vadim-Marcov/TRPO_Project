@@ -4,53 +4,62 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Расчёт зарплаты</title>
-  <link rel="stylesheet" href="BuhCalculate.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='BuhCalculate.css') }}" />
 </head>
 <body>
   <header class="top-bar">
     <div class="brand">PayMaster</div>
     <nav class="nav-center">
-      <span class="nav-item">Данные по зарплате</span>
-      <span class="nav-item">Порог зарплаты</span>
+      <a href="{{ url_for('salary_details') }}" class="nav-item">Данные по зарплате</a>
+      <a href="{{ url_for('salary_threshold') }}" class="nav-item">Порог зарплаты</a>
     </nav>
     <div class="nav-right">
-      <span class="nav-item">Выйти</span>
+      <a href="{{ url_for('logout') }}" class="nav-item">Выйти</a>
     </div>
   </header>
 
   <main class="content">
-    <form id="salaryForm">
+    <form method="POST" action="{{ url_for('calc_salary') }}">
       <h2>Расчёт зарплаты</h2>
 
-      <label for="fullname">ФИО</label>
-      <select id="fullname">
+      <label for="employee">ФИО</label>
+      <select id="employee" name="employee_id" required>
         <option value="">Выберите сотрудника</option>
-        <option value="Иванов И.И.">Иванов И.И.</option>
-        <option value="Петров П.П.">Петров П.П.</option>
-        <option value="Сидорова С.С.">Сидорова С.С.</option>
+        {% for e in employees %}
+          <option value="{{ e.id }}">{{ e.FIO }} ({{ e.payment_type }})</option>
+        {% endfor %}
       </select>
 
       <label for="period">Период (год, месяц)</label>
-      <input type="month" id="period" />
+      <input type="month" id="period" name="period" required />
 
       <label for="hours">Кол-во отработанных часов</label>
-      <input type="number" id="hours" min="0" />
+      <input type="number" id="hours" name="hours" min="0" required />
 
-      <label for="overtime">Сверхурочные часы (необязательно)</label>
-      <input type="number" id="overtime" min="0" />
+      <label for="rate">Ставка</label>
+      <input type="number" id="rate" name="rate" min="0" required />
 
-      <label for="premium">Премии (необязательно)</label>
-      <input type="number" id="premium" min="0" />
+      <label for="overtime">Сверхурочные часы</label>
+      <input type="number" id="overtime" name="overtime" min="0" />
 
-      <label for="bonus">Бонусы (необязательно)</label>
-      <input type="number" id="bonus" min="0" />
+      <label for="overtimeRate">Сверхурочная ставка</label>
+      <input type="number" id="overtimeRate" name="overtime_rate" min="0" />
+
+      <label for="premium">Премии</label>
+      <input type="number" id="premium" name="premium" min="0" />
+
+      <label for="bonus">Бонусы</label>
+      <input type="number" id="bonus" name="bonus" min="0" />
 
       <button type="submit">РАССЧИТАТЬ</button>
-      <div id="result" class="message"></div>
+
+      {% if message %}
+        <div id="result" class="message">{{ message }}</div>
+      {% endif %}
     </form>
   </main>
 
-  <!-- Анимированный фон -->
+   <!-- Анимированный фон -->
   <div class="animated-bg">
     <div class="shape circle"></div>
     <div class="shape circle small"></div>
@@ -59,28 +68,6 @@
     <div class="shape triangle"></div>
     <div class="shape triangle small"></div>
   </div>
-
-  <script>
-    document.getElementById('salaryForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const hours = parseFloat(document.getElementById('hours').value) || 0;
-      const overtime = parseFloat(document.getElementById('overtime').value) || 0;
-      const bonus = parseFloat(document.getElementById('bonus').value) || 0;
-      const premium = parseFloat(document.getElementById('premium').value) || 0;
-
-      const baseRate = 500;
-      const overtimeRate = 750;
-
-      const total =
-        hours * baseRate +
-        overtime * overtimeRate +
-        bonus +
-        premium;
-
-      const result = document.getElementById('result');
-      result.textContent = `Итоговая сумма: ${total.toLocaleString('ru-RU')} ₽`;
-    });
-  </script>
+  
 </body>
 </html>

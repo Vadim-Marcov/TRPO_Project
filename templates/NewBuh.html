@@ -4,31 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Добавление бухгалтера</title>
-  <link rel="stylesheet" href="NewBuh.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='NewBuh.css') }}" />
 </head>
 <body>
-  <!-- Верхняя панель -->
+   <!-- Верхняя панель -->
   <header class="top-bar">
     <div class="brand">PayMaster</div>
     <nav class="nav-right">
-      <span class="nav-item">Назад</span>
+      <!-- Кнопка назад ведёт в админку -->
+      <a href="{{ url_for('admin_home') }}" class="nav-item">Назад</a>
     </nav>
   </header>
 
   <main class="page">
     <section class="content form-card">
-      <form id="loginForm">
-        <h2>Добавление бухгалтера</h2>
+      <!-- Форма отправляется на сервер -->
+      <form method="POST" action="{{ url_for('new_buh') }}">
+  <h2>Добавление бухгалтера</h2>
 
-        <label for="username">Имя пользователя</label>
-        <input type="text" id="username" placeholder="Введите имя" />
+  <label for="username">Имя пользователя</label>
+  <input type="text" id="username" name="fio" placeholder="Введите имя" required />
 
-        <label for="password">Пароль</label>
-        <input type="password" id="password" placeholder="Введите пароль" />
+  <label for="password">Пароль</label>
+  <input type="password" id="password" name="password" placeholder="Введите пароль" required />
 
-        <button type="submit" class="primary">ДОБАВИТЬ</button>
-        <div id="result" class="message"></div>
-      </form>
+  <button type="submit" class="primary">ДОБАВИТЬ</button>
+
+  {% if message %}
+    <div class="message" style="color: green;">{{ message }}</div>
+  {% endif %}
+  </form>
     </section>
   </main>
 
@@ -42,21 +47,5 @@
     <div class="shape triangle small"></div>
   </div>
 
-  <script>
-    document.getElementById('loginForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const user = document.getElementById('username').value.trim();
-      const pass = document.getElementById('password').value.trim();
-      const result = document.getElementById('result');
-
-      if (user && pass) {
-        result.textContent = `Бухгалтер ${user} добавлен.`;
-        result.style.color = 'green';
-      } else {
-        result.textContent = 'Пожалуйста, заполните все поля.';
-        result.style.color = 'red';
-      }
-    });
-  </script>
 </body>
 </html>

@@ -4,24 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Редактирование сотрудников</title>
-  <link rel="stylesheet" href="Redact.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='Redact.css') }}" />
 </head>
 <body>
   <!-- Верхняя панель -->
   <header class="top-bar">
     <div class="brand">PayMaster</div>
     <nav class="nav-center">
-      <a href="/add_employee" class="nav-item">Добавить сотрудника</a>
-    <a href="/delete_employee" class="nav-item">Удалить сотрудника</a>
+      <a href="{{ url_for('add_employee') }}" class="nav-item">Добавить сотрудника</a>
+      <a href="{{ url_for('delete_employee') }}" class="nav-item">Удалить сотрудника</a>
     </nav>
     <div class="nav-right">
-    <a href="/admin" class="nav-item">Назад</a>
+      <a href="{{ url_for('admin_home') }}" class="nav-item">Назад</a>
     </div>
   </header>
 
+
   <div class="page">
-    <main class="content form-card">
-      <h2>Редактирование</h2>
+  <main class="content form-card">
+    <h2>Редактирование</h2>
+    <form method="POST" action="{{ url_for('edit_employees') }}">
       <div class="table-container">
         <table>
           <thead>
@@ -29,30 +31,37 @@
               <th>ФИО</th>
               <th>Период</th>
               <th>Отработанные часы</th>
-              <th>Сверхурочные часы</th>
+              <th>Сверхуроч. часы</th>
               <th>Ставка</th>
+              <th>Ставка сверхуроч.</th>
               <th>Премия</th>
-              <th>Бонусы</th>
+              <th>Разовая выплата</th>
               <th>Итого</th>
             </tr>
           </thead>
           <tbody>
+            {% for emp in employees %}
             <tr>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
+              <input type="hidden" name="employee_id" value="{{ emp.id }}">
+              <td><input type="text" name="fio_{{ emp.id }}" value="{{ emp.FIO }}"></td>
+              <td><input type="text" name="period_{{ emp.id }}" value="{{ emp.period }}"></td>
+              <td><input type="number" name="hours_{{ emp.id }}" value="{{ emp.hoursWorked }}"></td>
+              <td><input type="number" name="overtime_{{ emp.id }}" value="{{ emp.overtimeHours }}"></td>
+              <td><input type="text" name="rate_{{ emp.id }}" value="{{ emp.Rate }} ({{ emp.payment_type }})"></td>
+              <td><input type="number" name="overtime_rate_{{ emp.id }}" value="{{ emp.overtimeRate }}"></td>
+              <td><input type="number" name="bonus_{{ emp.id }}" value="{{ emp.bonus }}"></td>
+              <td><input type="number" name="one_time_{{ emp.id }}" value="{{ emp.oneTimePayment }}"></td>
+              <td><input type="number" name="total_{{ emp.id }}" value="{{ emp.totalEarnings }}"></td>
             </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
-      <button class="primary">ПОДТВЕРДИТЬ</button>
-    </main>
-  </div>
+      <button type="submit" class="primary">ПОДТВЕРДИТЬ</button>
+    </form>
+  </main>
+</div>
+
 
   <!-- Анимированный фон -->
   <div class="animated-bg" aria-hidden="true">

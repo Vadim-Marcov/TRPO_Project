@@ -4,37 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Добавление сотрудника</title>
-  <link rel="stylesheet" href="AddEmployee.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='AddEmployee.css') }}" />
 </head>
 <body>
   <!-- Верхняя панель -->
   <header class="top-bar">
     <div class="brand">PayMaster</div>
     <nav class="nav-right">
-      <span class="nav-item">Назад</span>
+      <!-- Кнопка назад ведёт в Redact.html -->
+      <a href="{{ url_for('edit_employees') }}" class="nav-item">Назад</a>
     </nav>
   </header>
 
   <main class="page">
     <section class="content form-card">
-      <form id="addForm">
+      <!-- Форма отправляется на сервер -->
+      <form method="POST" action="{{ url_for('add_employee') }}">
         <h2>Добавление сотрудника</h2>
 
         <label for="fullname">ФИО</label>
-        <input type="text" id="fullname" placeholder="Введите ФИО" />
+        <input type="text" id="fullname" name="fio" placeholder="Введите ФИО" required />
 
         <label for="rateType">Выбор ставки</label>
-        <select id="rateType">
+        <select id="rateType" name="payment_type" required>
           <option value="">Выберите ставку</option>
-          <option value="hourly">Почасовая</option>
-          <option value="fixed">Фиксированная</option>
+          <option value="1">По часовая ставка</option>
+          <option value="2">Фиксированная</option>
         </select>
 
-        <label for="insert">Ввод ставки</label>
-        <input type="text" id="insert" placeholder="Введите вставку" />
-
         <button type="submit" class="primary">ДОБАВИТЬ</button>
-        <div id="result" class="message"></div>
+
+        {% if message %}
+          <div class="message" style="color: green;">{{ message }}</div>
+        {% endif %}
       </form>
     </section>
   </main>
@@ -56,24 +58,5 @@
     <div class="shape triangle mid"></div>
     <div class="shape triangle tiny"></div>
   </div>
-
-  <script>
-    document.getElementById('addForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const name = document.getElementById('fullname').value.trim();
-      const rate = document.getElementById('rateType').value;
-      const insert = document.getElementById('insert').value.trim();
-      const result = document.getElementById('result');
-
-      if (name && rate && insert) {
-        const rateLabel = rate === 'hourly' ? 'Почасовая' : 'Фиксированная';
-        result.textContent = `Сотрудник ${name} добавлен. Ставка: ${rateLabel}, Cтавка: ${insert}.`;
-        result.style.color = 'green';
-      } else {
-        result.textContent = 'Пожалуйста, заполните все поля.';
-        result.style.color = 'red';
-      }
-    });
-  </script>
 </body>
 </html>
